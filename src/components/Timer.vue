@@ -1,57 +1,63 @@
 <template>
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <Stopwatch :timeInSeconds="timeInSeconds" />
-    <button class="button" @click="start" :disabled="stopwatchRunning">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button>
-    <button class="button" @click="stop" :disabled="!stopwatchRunning">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button>
+    <FormButton
+      :button="{
+        label: 'play',
+        icon: 'fas fa-play',
+        class: '',
+        disabled: stopwatchRunning
+      }"
+      @click="start"
+    />
+    <FormButton
+      :button="{
+        label: 'stop',
+        icon: 'fas fa-stop',
+        class: '',
+        disabled: !stopwatchRunning
+      }"
+      @click="stop"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 import Stopwatch from './Stopwatch.vue'
+import FormButton from './FormButton.vue'
 
 export default defineComponent({
-  name: "Timer",
-  
+  name: 'Timer',
+
   emits: ['finishedTimer'],
-  
+
   components: {
-    Stopwatch
+    Stopwatch,
+    FormButton
   },
-  
-  data () {
-    return {
-      timeInSeconds: 0,
-      stopwatch: 0,
-      stopwatchRunning: false
-    }
-  },
-  
+
+  data: () => ({
+    timeInSeconds: 0,
+    stopwatch: 0,
+    stopwatchRunning: false
+  }),
+
   methods: {
-    start () {
+    start() {
       // 1 seg = 1000 ms
       this.stopwatchRunning = true
       this.stopwatch = setInterval(() => {
-        this.timeInSeconds += 1        
+        this.timeInSeconds += 1
       }, 1000)
     },
-    
-    stop () {
+
+    stop() {
       this.stopwatchRunning = false
       clearInterval(this.stopwatch)
       this.$emit('finishedTimer', this.timeInSeconds)
       this.timeInSeconds = 0
     }
   }
-});
+})
 </script>
