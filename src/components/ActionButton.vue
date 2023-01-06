@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'FormButton',
+  name: 'ActionButton',
   emits: ['click'],
   props: {
     button: {

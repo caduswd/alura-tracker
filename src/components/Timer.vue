@@ -1,7 +1,7 @@
 <template>
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <Stopwatch :timeInSeconds="timeInSeconds" />
-    <FormButton
+    <ActionButton
       :button="{
         label: 'play',
         icon: 'fas fa-play',
@@ -10,7 +10,7 @@
       }"
       @click="start"
     />
-    <FormButton
+    <ActionButton
       :button="{
         label: 'stop',
         icon: 'fas fa-stop',
@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Stopwatch from './Stopwatch.vue'
-import FormButton from './FormButton.vue'
+import ActionButton from './ActionButton.vue'
 
 export default defineComponent({
   name: 'Timer',
@@ -34,7 +34,7 @@ export default defineComponent({
 
   components: {
     Stopwatch,
-    FormButton
+    ActionButton
   },
 
   data: () => ({

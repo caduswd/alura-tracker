@@ -1,39 +1,46 @@
 <template>
   <header>
     <h1>
-      <img src="@/assets/logo.png">  
+      <img src="@/assets/logo.png" />
     </h1>
-    <button class="button" @click="changeTheme">
-      {{ textButton }}
-    </button>
+    <ActionButton
+      :button="{
+        class: 'button',
+        label: textButton
+      }"
+      @click="changeTheme"
+    />
   </header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import ActionButton from './ActionButton.vue'
 
 export default defineComponent({
   name: 'Sidebar',
-  
+
   emits: ['themeChange'],
-  
-  data () {
+  components: {
+    ActionButton
+  },
+
+  data() {
     return {
       themeDarkActive: false
     }
   },
-  
+
   computed: {
-    textButton () {
-      if (this.themeDarkActive) {
-        return 'Desativar modo escuro'
-      }
-      return 'Ativar modo escuro'
+    textButton() {
+      return this.themeDarkActive
+        ? 'Desativar modo escuro'
+        : 'Ativar modo escuro'
     }
   },
-  
+
   methods: {
-    changeTheme () {
+    changeTheme() {
       this.themeDarkActive = !this.themeDarkActive
       this.$emit('themeChange', this.themeDarkActive)
     }
